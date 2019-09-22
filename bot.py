@@ -1,4 +1,3 @@
-import random
 import time
 
 from env_utils import env
@@ -6,6 +5,7 @@ from env_utils import env
 from instapy import InstaPy, Settings
 
 import proxy_api
+import proxy_hack
 
 PROXY = getattr(proxy_api, env('PROXY_TYPE'))()
 TAGS_TO_FOLLOW = env('TAGS_TO_FOLLOW').split()
@@ -14,10 +14,6 @@ session = None
 
 Settings.database_location = 'db/instapy.db'
 
-CUSTOM_CHROMEDRIVER_LOCATION = env('CHROMEDRIVER_LOCATION')
-if CUSTOM_CHROMEDRIVER_LOCATION:
-    Settings.chromedriver_location = CUSTOM_CHROMEDRIVER_LOCATION
-
 
 def get_new_session():
     global session
@@ -25,8 +21,8 @@ def get_new_session():
         session.end()
     session = InstaPy(username=env('INSTAGRAM_USERNAME'),
                       password=env('INSTAGRAM_PASSWORD'),
-                      #proxy_address=PROXY.proxy_host,
-                      #proxy_port=PROXY.proxy_port,
+                      proxy_address=PROXY.proxy_host,
+                      proxy_port=PROXY.proxy_port,
                       headless_browser=True,
                       geckodriver_path=env('GECKODRIVER_PATH'),
                       # nogui=True,
@@ -37,10 +33,10 @@ def get_new_session():
     session.set_relationship_bounds(enabled=True,
                                     potency_ratio=None,
                                     delimit_by_numbers=True,
-    			            max_followers=100000,
-    			            max_following=3000,
-    			            min_followers=100,
-    			            min_following=100)
+                                    max_followers=100000,
+                                    max_following=3000,
+                                    min_followers=100,
+                                    min_following=100)
     """Image Check with Image tagging api"""
     # default enabled=False , enables the checking with the clarifai api (image tagging)
     # if secret and proj_id are not set, it will get the environment Variables
@@ -91,4 +87,3 @@ while True:
 """Ending the script"""
 # clears all the cookies, deleting you password and all information from this session
 session.end()
-

@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  instapy:
+    build:
+      context: .
+    env_file: .env
