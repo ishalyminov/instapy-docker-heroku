@@ -63,7 +63,7 @@ while True:
     # you can put in as much tags as you want, likes 100 of each tag
     if PROXY.proxy_changed():
         get_new_session()
-    session.like_by_tags(TAGS_TO_FOLLOW, amount=env('LIKE_BY_TAGS_AMOUNT', 0))
+    session.like_by_tags(TAGS_TO_FOLLOW, amount=int(env('LIKE_BY_TAGS_AMOUNT'), 0))
 
     print('Sleeping for {:.3f} seconds'.format(sleep_time))
     time.sleep(sleep_time)
