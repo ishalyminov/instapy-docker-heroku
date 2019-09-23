@@ -28,7 +28,7 @@ $ heroku container:push instapy && heroku container:release heroku
 
 6. Start the app:
 ```bash
-$ heroku ps:scale worker=1
+$ heroku ps:scale instapy=1
 ```
 
 7. Observe your Instagram grow!
