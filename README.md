@@ -21,17 +21,23 @@ $ heroku container:login
 ```bash
 $ ./heroku_init.sh <your-app-name>
 ```
-5. Push the code to Heroku and release it into your app:
+
+5. Build the container
 ```bash
-$ heroku container:push instapy && heroku container:release heroku
+  docker-compose build
 ```
 
-6. Start the app:
+6. Push the code to Heroku and release it into your app:
+```bash
+$ heroku container:push instapy && heroku container:release instapy 
+```
+
+7. Start the app:
 ```bash
 $ heroku ps:scale instapy=1
 ```
 
-7. Observe your Instagram grow!
+8. Observe your Instagram grow!
 ```bash
 $ heroku logs --tail
 ```
