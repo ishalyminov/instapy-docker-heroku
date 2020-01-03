@@ -5,5 +5,5 @@ heroku create $NAME
 heroku buildpacks:add heroku/python
 heroku plugins:install heroku-config
 
-heroku config:push
+cat .env | xargs heroku config:set
 
